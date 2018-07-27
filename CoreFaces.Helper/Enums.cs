@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -7,6 +9,7 @@ namespace CoreFaces.Helper
 {
     public class Enums
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum Currency
         {
             [Description("Türk lirası.")]
@@ -18,7 +21,7 @@ namespace CoreFaces.Helper
             [Description("Puan")]
             POINT = 4
         }
-
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum Language
         {
             [Description("Türkçe")]
@@ -26,7 +29,7 @@ namespace CoreFaces.Helper
             [Description("İngilizce")]
             English = 2
         }
-
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum TransactionType
         {
             [Description("Order")]
