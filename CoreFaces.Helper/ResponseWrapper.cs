@@ -59,7 +59,7 @@ namespace CoreFaces.Helper
         public int StatusCode { get; set; }
         public string RequestId { get; }
         public List<ValidationFailure> ErrorMessage { get; set; }
-        public dynamic Result { get; set; }
+        public TEntity Result { get; set; }
         public CommonApiResponse()
         { }
 
@@ -70,6 +70,17 @@ namespace CoreFaces.Helper
             errList.Add(err);
 
             return new CommonApiResponse<TEntity>(response, statusCode, status, result, errList);
+        }
+        
+        public static CommonApiResponse<TEntity> CreateByDynamic(HttpResponse response, HttpStatusCode statusCode, bool status, dynamic result, object errorMessage)
+        {
+            List<ValidationFailure> errList = new List<ValidationFailure>();
+            ValidationFailure err = new ValidationFailure("", errorMessage.ToString());
+            errList.Add(err);
+
+            TEntity obj = JsonConvert.DeserializeObject<TEntity>(JsonConvert.SerializeObject(result));
+
+            return new CommonApiResponse<TEntity>(response, statusCode, status, obj, errList);
         }
 
 
