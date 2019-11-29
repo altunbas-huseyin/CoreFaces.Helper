@@ -59,7 +59,7 @@ namespace CoreFaces.Helper
         public int StatusCode { get; set; }
         public string RequestId { get; }
         public List<ValidationFailure> ErrorMessage { get; set; }
-        public TEntity Result { get; set; }
+        public dynamic Result { get; set; }
         public CommonApiResponse()
         { }
 
